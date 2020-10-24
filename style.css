@@ -1,0 +1,139 @@
+html {
+    font-family: sans-serif;
+}
+
+form {
+    background-color: white;
+    padding: 3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 8px;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: normal;
+}
+.wrapper {
+    text-align: center;
+    background-color: aliceblue;
+    max-width: 100%;
+    padding: 2rem;
+}
+
+.content {
+    position: relative;
+    padding: 2rem;
+    margin-block-end: 2rem;
+    background-color: white;
+    border-radius: 8px;
+
+}
+
+.absolutBtn {
+    position: absolute;
+    right: 0;
+    top: 28px;
+}
+
+.countSvg {
+    background-color: gold;
+    border-radius: 50%;
+    padding: 10px;
+}
+.absolutBtn svg {
+    fill: chocolate;
+}
+
+h1 {
+    padding-block-end: 3rem;
+}
+
+input {
+    padding-block-end: 8px;
+    padding-block-start: 8px;
+    padding-inline-start: 16px;
+    border-radius: 5px;
+    background-color: aliceblue;
+    width: 100%;
+}
+
+.add-topic {
+    background-color: white;
+    padding-block-start: 2rem;
+    padding-block-end: 2rem;
+    border-radius: 5px;
+}
+
+#add-new-topic {
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    background-color: gold;
+    border-radius: 5px;
+    padding-inline-start: 16px;
+    padding-inline-end: 16px;
+    padding-block-start: 5px;
+    padding-block-end: 5px;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+}
+
+.downVoteBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.upvoteBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;   
+}
+
+.voteLayout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.next-topic{
+    margin-block-start: 3rem;
+    padding: 2rem;
+}
+
+nav {
+    background-color: aliceblue;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+ul {
+    background-color: white;
+    border-radius: 5px;
+    padding: 2rem;
+    position: relative;
+}
+
+li {
+    list-style: none;
+}
+
+.archive-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+span {
+    color: chocolate;
+    font-size: 18px;
+    padding-inline-end: 1rem;
+}
