@@ -29772,40 +29772,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/Input.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Input = Input;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function Input() {
-  const [value, setValue] = (0, _react.useState)("");
-
-  const searchInput = e => {
-    e.preventDefault();
-  };
-
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, "ADD A TOPIC"), /*#__PURE__*/_react.default.createElement("form", {
-    onSubmit: searchInput
-  }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    placeholder: "Write your topic ideas here",
-    value: value,
-    onChange: e => setValue(e.target.value)
-  })), /*#__PURE__*/_react.default.createElement("button", {
-    type: "submit",
-    className: "submit-btn"
-  }, "Submit")));
-}
-},{"react":"node_modules/react/index.js"}],"components/TeaTopicList.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/TeaTopicList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29890,14 +29857,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function PastTeaTopic({
   topic
 }) {
-  const [remove, setRemove] = (0, _react.useState)([]);
+  const [remove, setRemove] = (0, _react.useState)("");
 
   const removeDiscussed = () => {
     // remove.filter((topic, index) => {
     //     if (topic.id === id) {
-    //         topics.splice(index, 1);
+    //         topic.slice(index, 1);
     //     }
     // });
+    console.log(remove);
     console.log("clicked");
   };
 
@@ -29906,7 +29874,7 @@ function PastTeaTopic({
     className: "content"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "absolutBtn",
-    onClick: () => setRemove(removeDiscussed)
+    onClick: removeDiscussed
   }, /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24",
@@ -29932,8 +29900,6 @@ exports.TeaTopic = TeaTopic;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Input = require("./Input");
-
 var _TeaTopicList = _interopRequireDefault(require("./TeaTopicList"));
 
 var _PastTeaTopic = _interopRequireDefault(require("./PastTeaTopic"));
@@ -29944,10 +29910,11 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+// import { Input } from "./Input"
 const API_URL = `https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70331ca4a16bb99/raw/6da767327041de13693181c2cb09459b0a3657a1/topics.json`;
 
 function TeaTopic() {
-  const [searchTeaTopic, setSearchTeaTopic] = (0, _react.useState)([]); // const [filterDiscussed, setFilterDiscussed] = useState("");
+  const [searchTeaTopic, setSearchTeaTopic] = (0, _react.useState)([]);
 
   const fetchTeaTopic = async () => {
     try {
@@ -29959,10 +29926,36 @@ function TeaTopic() {
     }
   };
 
+  const addNewTopic = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    let inputValue = form.addTopic.value;
+    console.log(form);
+    const newTopic = {
+      id: new Date(),
+      discussedOn: "",
+      upvotes: 0,
+      downvotes: 0,
+      title: inputValue
+    };
+    searchTeaTopic.push(newTopic);
+    form.reset();
+    setSearchTeaTopic([...searchTeaTopic]);
+  };
+
   (0, _react.useEffect)(() => {
     fetchTeaTopic();
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Input.Input, null), /*#__PURE__*/_react.default.createElement("h4", null, "NEXT TOPICS"), searchTeaTopic.sort((topicA, topicB) => {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, "ADD A TOPIC"), /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: addNewTopic
+  }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "addTopic",
+    placeholder: "Write your topic ideas here"
+  })), /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit",
+    className: "submit-btn"
+  }, "Submit"))), /*#__PURE__*/_react.default.createElement("h4", null, "NEXT TOPICS"), searchTeaTopic.sort((topicA, topicB) => {
     const ratioA = topicA.upvotes - topicA.downvotes;
     const ratioB = topicB.upvotes - topicB.downvotes;
     return ratioB - ratioA;
@@ -29978,7 +29971,7 @@ function TeaTopic() {
     });
   })));
 }
-},{"react":"node_modules/react/index.js","./Input":"components/Input.js","./TeaTopicList":"components/TeaTopicList.js","./PastTeaTopic":"components/PastTeaTopic.js"}],"components/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./TeaTopicList":"components/TeaTopicList.js","./PastTeaTopic":"components/PastTeaTopic.js"}],"components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30037,7 +30030,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49327" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49907" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input } from "./Input"
+// import { Input } from "./Input"
 import TeaTopicList from "./TeaTopicList";
 import PastTeaTopic from "./PastTeaTopic"
 
@@ -8,7 +8,6 @@ const API_URL = `https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c7033
 
 export function TeaTopic() {
     const [searchTeaTopic, setSearchTeaTopic] = useState([]);
-    // const [filterDiscussed, setFilterDiscussed] = useState("");
 
     const fetchTeaTopic = async () => {
         try {
@@ -20,6 +19,26 @@ export function TeaTopic() {
         }
     }
 
+    const addNewTopic = e => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        let inputValue = form.addTopic.value;
+        console.log(form)
+     
+        const newTopic = {
+            id: new Date(),
+            discussedOn: "",
+            upvotes: 0,
+            downvotes: 0,
+            title: inputValue,
+        }
+ 
+        searchTeaTopic.push(newTopic);
+        form.reset() 
+        setSearchTeaTopic([...searchTeaTopic]) 
+    }
+
+
     useEffect(() => {
         fetchTeaTopic();
     }, []);
@@ -27,7 +46,15 @@ export function TeaTopic() {
     return (
         <>
             <div>
-                <Input />
+                <div>
+                    <h4>ADD A TOPIC</h4>
+                    <form onSubmit={addNewTopic}>
+                        <label>
+                            <input type="text" name="addTopic" placeholder="Write your topic ideas here"  />
+                        </label>
+                        <button type="submit" className="submit-btn">Submit</button>
+                    </form>
+                </div>
                 <h4>NEXT TOPICS</h4>
                 {searchTeaTopic.sort((topicA, topicB) => {
                     const ratioA = topicA.upvotes - topicA.downvotes;
