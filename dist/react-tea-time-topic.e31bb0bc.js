@@ -29857,16 +29857,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function PastTeaTopic({
   topic
 }) {
-  const [remove, setRemove] = (0, _react.useState)("");
+  const [remove, setRemove] = (0, _react.useState)([]);
 
-  const removeDiscussed = () => {
-    // remove.filter((topic, index) => {
-    //     if (topic.id === id) {
-    //         topic.slice(index, 1);
-    //     }
-    // });
-    console.log(remove);
-    console.log("clicked");
+  const removeDiscussed = id => {
+    const newList = remove.filter(topic => topic.id !== id);
+    setRemove(newList);
+    console.log(id);
   };
 
   const discussedOnDate = new Date(Number(topic.discussedOn));
@@ -29910,7 +29906,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-// import { Input } from "./Input"
 const API_URL = `https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70331ca4a16bb99/raw/6da767327041de13693181c2cb09459b0a3657a1/topics.json`;
 
 function TeaTopic() {
@@ -29946,7 +29941,9 @@ function TeaTopic() {
   (0, _react.useEffect)(() => {
     fetchTeaTopic();
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, "ADD A TOPIC"), /*#__PURE__*/_react.default.createElement("form", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "div"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "ADD A TOPIC"), /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: addNewTopic
   }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
@@ -29955,7 +29952,9 @@ function TeaTopic() {
   })), /*#__PURE__*/_react.default.createElement("button", {
     type: "submit",
     className: "submit-btn"
-  }, "Submit"))), /*#__PURE__*/_react.default.createElement("h4", null, "NEXT TOPICS"), searchTeaTopic.sort((topicA, topicB) => {
+  }, "Submit"))), /*#__PURE__*/_react.default.createElement("h4", null, "NEXT TOPICS"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "div"
+  }, searchTeaTopic.sort((topicA, topicB) => {
     const ratioA = topicA.upvotes - topicA.downvotes;
     const ratioB = topicB.upvotes - topicB.downvotes;
     return ratioB - ratioA;
@@ -29964,7 +29963,9 @@ function TeaTopic() {
       key: topic.id,
       topic: topic
     });
-  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, "PAST TOPICS"), searchTeaTopic.filter(topic => topic.discussedOn).map(topic => {
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "div"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "PAST TOPICS"), searchTeaTopic.filter(topic => topic.discussedOn).map(topic => {
     return /*#__PURE__*/_react.default.createElement(_PastTeaTopic.default, {
       key: topic.id,
       topic: topic
@@ -30030,7 +30031,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49907" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53157" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

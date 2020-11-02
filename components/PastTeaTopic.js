@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 
 function PastTeaTopic ({topic}) {
-    const [ remove, setRemove ] = useState("");
+    const [ remove, setRemove ] = useState([]);
 
-    const removeDiscussed = () => {
-        // remove.filter((topic, index) => {
-        //     if (topic.id === id) {
-        //         topic.slice(index, 1);
-        //     }
-        // });
-        console.log(remove)
-        console.log("clicked")
+    const removeDiscussed = (id) => {
+        const newList = remove.filter(topic => topic.id !== id);
+        setRemove(newList);
+        console.log(id)
     }
 
 

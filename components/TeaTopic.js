@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { Input } from "./Input"
 import TeaTopicList from "./TeaTopicList";
 import PastTeaTopic from "./PastTeaTopic"
 
@@ -24,7 +23,7 @@ export function TeaTopic() {
         const form = e.currentTarget;
         let inputValue = form.addTopic.value;
         console.log(form)
-     
+
         const newTopic = {
             id: new Date(),
             discussedOn: "",
@@ -32,10 +31,10 @@ export function TeaTopic() {
             downvotes: 0,
             title: inputValue,
         }
- 
+
         searchTeaTopic.push(newTopic);
-        form.reset() 
-        setSearchTeaTopic([...searchTeaTopic]) 
+        form.reset()
+        setSearchTeaTopic([...searchTeaTopic])
     }
 
 
@@ -46,27 +45,29 @@ export function TeaTopic() {
     return (
         <>
             <div>
-                <div>
+                <div className="div">
                     <h4>ADD A TOPIC</h4>
                     <form onSubmit={addNewTopic}>
                         <label>
-                            <input type="text" name="addTopic" placeholder="Write your topic ideas here"  />
+                            <input type="text" name="addTopic" placeholder="Write your topic ideas here" />
                         </label>
                         <button type="submit" className="submit-btn">Submit</button>
                     </form>
                 </div>
                 <h4>NEXT TOPICS</h4>
-                {searchTeaTopic.sort((topicA, topicB) => {
-                    const ratioA = topicA.upvotes - topicA.downvotes;
-                    const ratioB = topicB.upvotes - topicB.downvotes;
-                    return ratioB - ratioA;
-                }).filter((topic) => !topic.discussedOn).map(topic => {
-                    return (
-                        <TeaTopicList key={topic.id} topic={topic} />
-                    )
-                })}
+                <div className="div">
+                    {searchTeaTopic.sort((topicA, topicB) => {
+                        const ratioA = topicA.upvotes - topicA.downvotes;
+                        const ratioB = topicB.upvotes - topicB.downvotes;
+                        return ratioB - ratioA;
+                    }).filter((topic) => !topic.discussedOn).map(topic => {
+                        return (
+                            <TeaTopicList key={topic.id} topic={topic} />
+                        )
+                    })}
+                </div>
             </div>
-            <div>
+            <div className="div">
                 <h4>PAST TOPICS</h4>
                 {searchTeaTopic.filter(topic => topic.discussedOn).map(topic => {
                     return (

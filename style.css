@@ -2,6 +2,10 @@ html {
     font-family: sans-serif;
 }
 
+body {
+    margin: 0;
+}
+
 form {
     background-color: white;
     padding: 3rem;
@@ -136,4 +140,12 @@ span {
     color: chocolate;
     font-size: 18px;
     padding-inline-end: 1rem;
+}
+
+.div {
+    margin: auto;
+    max-width: 700px;
+    padding-block-start: 3rem;
+    padding-block-end: 3rem;
+
 }
